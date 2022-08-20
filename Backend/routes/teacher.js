@@ -39,7 +39,7 @@ router.post('/signup', async (req, res)=>{
         });
         console.log(new_teacher)
         new_teacher.save()
-        .then(res.json({msg:"Registered", teacher : new_teacher}))
+        .then(res.json({msg:'Registered', teacher : new_teacher}))
 
     }
     catch(err){
@@ -62,7 +62,7 @@ router.post('/login', async (req, res)=>{
         if(success){
             //const token = jwt.sign({_id : found._id}, process.env.TOKEN_SECRET);
              //res.header('token', token)
-             res.json({msg:"Login", teacher: found})
+             res.json({msg:'Login', teacher: found})
         }
         else{
             //res.status(403).send('Password does not Match!')
@@ -72,7 +72,7 @@ router.post('/login', async (req, res)=>{
         
     }
     else{
-        res.json({msg:"Teacher Email does not exist"})
+        res.json({msg:'Teacher Email does not exist'})
     }
 }
 catch(err){
@@ -110,13 +110,13 @@ router.post('/forgetpass/:Temail', async (req, res)=>{
               console.log(error);
             } else {
               console.log('Email sent: ' + info.response);
-              res.json({msg: "Email Sent to your Email Address"})
+              res.json({msg: 'Email Sent to your Email Address'})
             }
           })
 
     }
     else{
-        res.json({msg: "The Email is not Registered with us"})
+        res.json({msg: 'The Email is not Registered with us'})
     }
     
 })
@@ -128,10 +128,10 @@ router.get('/dashboard/:Tid', async (req, res)=>{
     const found = await Class.find({ClassTeacher : id});
     if(found.length>=1){
         console.log(found)
-        res.json({msg: "done", class: found})
+        res.json({msg: 'done', class: found})
     }
     else {
-        res.json({msg: "No Class Created Yet"})
+        res.json({msg: 'No Class Created Yet'})
     }
 
 })
@@ -140,7 +140,7 @@ router.get('/dashboard/:Tid', async (req, res)=>{
 router.post('/dashboard/createClass/:Tid', async (req, res)=>{
     const T_id = req.params.Tid;
     if(!req.body.ClassName || !req.body.ClassDescription){
-        return res.json({msg: "Fill Field Correctly"})
+        return res.json({msg: 'Fill Field Correctly'})
     }
 //generating class id
         var C_id = '';
@@ -161,7 +161,7 @@ router.post('/dashboard/createClass/:Tid', async (req, res)=>{
             });
             console.log(new_class)
             new_class.save()
-            .then(res.json({msg:"Created", class : new_class}))
+            .then(res.json({msg:'Created', class : new_class}))
     
         }
         catch(err){
@@ -178,11 +178,11 @@ router.get('/dashboard/class/:id', async (req, res)=>{
     const found = await Assignment.find({ClassID : Cl_id});
     if(found.length>=1){
         console.log(found)
-        res.json({msg: "done", Assignment: found})
+        res.json({msg: 'done', Assignment: found})
 
     }
     else {
-        res.json({msg: "No Assignments"})
+        res.json({msg: 'No Assignments'})
     }
 }
 catch (err){
@@ -209,7 +209,7 @@ router.post('/dashboard/class/createAssignment/:Cid', upload.single('Assignment'
     console.log(fileinfo)
     var filename = fileinfo.filename
     if(!req.body.AssignmentName){
-        return res.json({msg: "Fill Field Correctly"})
+        return res.json({msg: 'Fill Field Correctly'})
     }
         try{
             const new_assign = new Assignment({
@@ -223,7 +223,7 @@ router.post('/dashboard/class/createAssignment/:Cid', upload.single('Assignment'
             });
             console.log(new_assign)
             new_assign.save()
-            .then(res.json({msg:"Created", assign : new_assign}))
+            .then(res.json({msg:'Created', assign : new_assign}))
     
         }
         catch(err){
@@ -251,7 +251,7 @@ router.put('/profile/update/:id', async (req, res)=>{
         //if user does not want to update password
         if(!req.body.NewPassword){
             console.log('no new')
-            const success = await bcrypt.compare(req.body.Currentpassword, teacherone.password)
+            const success = await bcrypt.compare(req.body.CurrentPassword, teacherone.password)
             if(success){ 
                 console.log('success') 
             try{
@@ -261,27 +261,27 @@ router.put('/profile/update/:id', async (req, res)=>{
                         number : req.body.number ? req.body.number : teacherone.number,
                         }
                 })
-                res.json({msg: "updated", update_teacher}) 
+                res.json({msg: 'updated', update_teacher}) 
             }
             catch(err){
                 console.log(err)
-                res.json({msg: "User Does not Exist", err: err})
+                res.json({msg: 'User Does not Exist', err: err})
             }
 
             }
             else{
-                return res.json({msg: "Password does not match with stored one"})
+                return res.json({msg: 'Password does not match with stored one'})
             }
        }
        //if user want to update password
        else if(req.body.NewPassword && req.body.ConfirmPassword){
         console.log("new")
-        // if(req.body.NewPassword !== req.body.ConfirmPassword){
-        //     return res.json({msg: "Password Fields Does not Match"})
-        // }
-        const success = await bcrypt.compare(req.body.Currentpassword, teacherone.password)
+        if(req.body.NewPassword !== req.body.ConfirmPassword){
+            return res.json({msg: 'New & Confirm Password Fields Does not Match'})
+        }
+        const success = await bcrypt.compare(req.body.CurrentPassword, teacherone.password)
         const salt = await bcrypt.genSalt();
-        const hashpassword =await  bcrypt.hash(req.body.Newpassword, salt);
+        const hashpassword =await  bcrypt.hash(req.body.NewPassword, salt);
             if(success){  
             try{
                 const update_teacher = await Teacher.updateOne({_id: req.params.id},{
@@ -291,15 +291,15 @@ router.put('/profile/update/:id', async (req, res)=>{
                         password : hashpassword
                         }
                 })
-                res.json({msg: "updated", update_teacher}) 
+                res.json({msg: 'updated', update_teacher}) 
             }
             catch(err){
-                res.json({msg: "User Does not Exist", err})
+                res.json({msg: 'User Does not Exist', err})
             }
 
             }
             else{
-                return res.json({msg: "Password does not match with stored one"})
+                return res.json({msg: 'Password does not match with stored one'})
             }
 
 
