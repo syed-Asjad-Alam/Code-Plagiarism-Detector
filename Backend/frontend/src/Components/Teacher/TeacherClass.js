@@ -14,7 +14,8 @@ const TeacherClass = (props) => {
   return (
     <>
     <div style={{border: "2px solid black", margin:'2%', cursor:"pointer"}}
-     onClick={()=>(navigate('/assignments'))}>
+     onClick={()=>(navigate('/assignments', {state:{class: class_id}}))}>
+      
     <div>Class Name : {props.classname}</div>
     <div>Class Description : {props.description}</div>
     <div>Class Code: {props.code}</div>

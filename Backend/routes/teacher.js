@@ -202,12 +202,22 @@ var storage = multer.diskStorage({
  
 var upload = multer({storage: storage })
 
+router.post('/upload', upload.single('Assignment'),(req, res)=>{
+    var fileinfo = req.file;
+    var filename = fileinfo.filename
+    console.log("hereeee "+ req.file)
+
+    res.json(fileinfo)
+
+})
+
 //creating assignment in class
 router.post('/dashboard/class/createAssignment/:Cid', upload.single('Assignment'), async (req, res)=>{
     const C_id = req.params.Cid;
-    var fileinfo = req.file;
-    console.log(fileinfo)
-    var filename = fileinfo.filename
+    console.log("her "+ req.file)
+    // var fileinfo = req.file;
+    // console.log(fileinfo)
+    // var filename = fileinfo.filename
     if(!req.body.AssignmentName){
         return res.json({msg: 'Fill Field Correctly'})
     }
@@ -217,7 +227,7 @@ router.post('/dashboard/class/createAssignment/:Cid', upload.single('Assignment'
                 "Instructions": req.body.Instructions,
                 "ExpectedOutput": req.body.ExpectedOutput,
                 "Deadline":req.body.Deadline,
-                "AssignmentFile": filename,
+                "AssignmentFile": 'filename',
                 "AllowedCode": req.body.AllowedCode,
                 "ClassID" : C_id
             });

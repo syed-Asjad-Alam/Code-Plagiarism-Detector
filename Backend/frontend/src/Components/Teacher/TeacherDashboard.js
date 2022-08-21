@@ -14,10 +14,12 @@ const navigate = useNavigate();
 const teacher = location.state.teacher;
 const t_id = teacher._id;
 
+//console.log("t in dashboard "+ location.state)
 
-console.log('teacher : '+teacher)
-console.log("cccc"+classdata)
-console.log("t : "+t_id)
+
+// console.log('teacher : '+teacher)
+// console.log("cccc"+classdata)
+// console.log("t : "+t_id)
 
 
 React.useEffect(()=>{
@@ -42,6 +44,10 @@ React.useEffect(()=>{
     <>
     <div>Teacher: {teacher.firstname + teacher.lastname}  Dashboard</div>
     <div>
+        <button onClick={()=>(navigate('/profile', {state:{teacher: location.state.teacher }}))}>Profile</button>
+    </div>
+    <button onClick={()=>(navigate('/login'))}>Logout</button>
+    <div>
         {msg!='done' ? <div>{msg}</div> : 
         <div>
              {classdata?.map((c)=>{
@@ -63,7 +69,7 @@ React.useEffect(()=>{
 
     </div>
     <div>
-        <button onClick={()=>(navigate('/createclass', {state: {teacher: teacher}}))}> Create Class</button>
+        <button onClick={()=>(navigate('/createclass', {state: {teacher: teacher}}))}> Create New Class</button>
     </div>
 
     </>

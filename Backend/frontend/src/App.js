@@ -8,6 +8,9 @@ import TeacherDashboard from './Components/Teacher/TeacherDashboard';
 import TeacherClass from './Components/Teacher/TeacherClass';
 import TeacherCreateClass from './Components/Teacher/TeacherCreateClass';
 import TeacherAssignment from './Components/Teacher/TeacherAssignment';
+import TeacherCreateAssign from './Components/Teacher/TeacherCreateAssign';
+import TeacherProfile from './Components/Teacher/TeacherProfile';
+import TeacherUpdateProfile from './Components/Teacher/TeacherUpdateProfile';
 
 const App = ()=> {
   return (
@@ -21,6 +24,12 @@ const App = ()=> {
       <Route exact path="/dashboard" element={<TeacherDashboard/>} />
       <Route exact path="/createclass" element={<TeacherCreateClass/>} />
       <Route exact path="/assignments" element={<TeacherAssignment/>} />
+      <Route exact path="/createassign" element={<TeacherCreateAssign/>} />
+      <Route exact path="/profile" element={<TeacherProfile/>} />
+      <Route exact path="/update" element={<TeacherUpdateProfile/>} />
+
+
+
 
 
 

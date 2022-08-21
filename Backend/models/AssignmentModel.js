@@ -14,7 +14,8 @@ const Assignmentschema = new mongoose.Schema({
         required: false
     },
     Deadline: {
-        type:Date, 
+        //type: Date
+        type:String, 
         required:true
     },
     AssignmentFile:{
