@@ -11,60 +11,83 @@ const TeacherCreateAssign = () => {
     const [instruc, setinstruc] = useState('')
     const [expect, setexpect] = useState('')
     const [deadline, setdeadline] = useState('')
-    const [assignfile, setassignfile] = useState()
+    const [assignfile, setassignfile] = useState(null)
     const [allowed, setallowed] = useState('')
 
     
 
     const navigate = useNavigate();
 
-    const uploadfile = (e) =>{
-        e.preventDefault();
-        console.log('uploading file')
+    // const uploadfile = (e) =>{
+    //     e.preventDefault();
+    //     console.log('uploading file')
 
-        const sendPostRequest = async () => {
-            console.log('in post')
-            try {
-                const res = await axios.post('http://localhost:4000/teacher/upload',{
-                    Assignment : assignfile
-                });
-                console.log(res.data);
-                //setmsg(res.data.msg)
-                //alert(res.data.msg)
+    //     const sendPostRequest = async () => {
+    //         console.log('in post')
+    //         try {
+    //             const res = await axios.post('http://localhost:4000/teacher/upload',{
+    //                 Assignment : assignfile
+    //             });
+    //             console.log(res.data);
+    //             //setmsg(res.data.msg)
+    //             //alert(res.data.msg)
                 
       
-            } catch (err) {
-                // Handle Error Here
-                console.error(err);
-            }
-        };
-        sendPostRequest();
+    //         } catch (err) {
+    //             // Handle Error Here
+    //             console.error(err);
+    //         }
+    //     };
+    //     sendPostRequest();
 
 
-    }
+    // }
+
+    // const changeHandler = (event) => {
+
+    //   setassignfile(event.target.files[0]);
+      
+    //   console.log("here"+assignfile.name)
+    //   console.log("after")
+    //   console.log(event.target.files[0])
+  
+    // };
+
+
+    // const handleSubmit = (event) => {
+    //   event.preventDefault();
+    //   console.log("here");
+    //   const data = new FormData(event.currentTarget);
+    //   sendData(data);
+    // };
 
     const CreatingAssign = (e)=>{
+      console.log("create"+ assignfile.name)
         e.preventDefault();
-        console.log('Assign Creating ')
-        console.log("assign file"+assignfile)
+        // console.log('Assign Creating ')
+        // console.log("assign file"+assignfile)
     
         const sendPostRequest = async () => {
           console.log('in post')
           try {
-              const res = await axios.post('http://localhost:4000/teacher/dashboard/class/createAssignment/'+c_id,{
+              const res = await axios.post('http://localhost:4000/teacher/dashboard/class/createAssignment/'+c_id, {
                 AssignmentName: assignname,
                 Instructions: instruc,
                 Deadline: deadline,
                 ExpectedOutput: expect,
                 AssignmentFile:assignfile,
                 AllowedCode: allowed,
+                 }, {
+                  headers: {
+                    'Content-Type': 'multipart/form-data'
+                  }
                  });
-              console.log(res.data);
+              //console.log(res.data);
               //setmsg(res.data.msg)
               alert(res.data.msg)
               if(res.data.msg === 'Created'){
-                console.log('in if')
-                console.log(res.data.assign)
+                // console.log('in if')
+                // console.log(res.data.assign)
                 navigate('/assignments', {state: {class: c_id}})
               }
     
@@ -82,22 +105,22 @@ const TeacherCreateAssign = () => {
         <>
     <div>Create New Assignment</div>
     <div className="form">
-     <form method='POST' action='/upload' encType= 'multipart/form-data'>
+     <form method='POST' encType='multipart/form-data'>
        <div className="input-container">
          <label>Assignment Name :  </label>
-         <input type="text" name="ename"
+         <input type="text" name="Assignname"
           onChange={(x) => setassignname(x.target.value)}
           value={assignname} required />
        </div>
        <div className="input-container">
          <label>Assignment Instructions : </label>
-         <input type="text" name="inst" 
+         <input type="text" name="instruction" 
          value={instruc}
          onChange={(x) => setinstruc(x.target.value)} required />
        </div>
        <div className="input-container">
          <label>Assignment Deadline : </label>
-         <input type="text" name="dead" 
+         <input type="text" name="deadline" 
          value={deadline}
          onChange={(x) => setdeadline(x.target.value)} required />
        </div>
@@ -114,10 +137,8 @@ const TeacherCreateAssign = () => {
        </div>
        <div className="input-container">
          <label>Assignment File : </label>
-         <input type="file" name="Assignment"  required 
-         onChange={(x) => setassignfile(x.target.value)} />
-         {/* <button type='submit' >Upload</button> */}
-         
+         <input type="file" name="Assignment"
+         onChange={(e)=>setassignfile(e.target.files[0])}  />         
        </div>
        <div className="button-container">
          <button onClick={CreatingAssign}>Create</button>

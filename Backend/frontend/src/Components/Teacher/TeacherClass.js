@@ -8,7 +8,7 @@ const TeacherClass = (props) => {
     const class_id = props.classid;
     const t_id = props.teacher._id;
     const teacher = props.teacher
-    console.log("t: "+ t_id + "c : "+ class_id)
+    //console.log("t: "+ t_id + "c : "+ class_id)
     const navigate = useNavigate();
 
   return (

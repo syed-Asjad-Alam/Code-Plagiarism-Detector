@@ -15,7 +15,7 @@ const [num, setnum] = useState();
 const teacher = location.state.teacher;
 const t_id = teacher._id;
 
-console.log("t in profile" + t_id)
+//console.log("t in profile" + t_id)
 
 React.useEffect(()=>{
 

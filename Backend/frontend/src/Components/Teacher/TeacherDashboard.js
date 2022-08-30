@@ -27,7 +27,7 @@ React.useEffect(()=>{
     const sendGetRequest = async () => {
         try {
             const res = await axios.get("http://localhost:4000/teacher/dashboard/"+t_id);
-            console.log(res.data);
+            //console.log(res.data);
             setclassdata(res.data.class);
             setmsg(res.data.msg)
             //console.log(classdata)

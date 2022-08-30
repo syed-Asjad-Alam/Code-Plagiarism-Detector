@@ -11,17 +11,17 @@ const TeacherAssignment = () => {
     const [msg, setmsg] = useState('');
     const navigate = useNavigate();
     const c_id = location.state.class;
-    console.log(c_id)
+    //console.log(c_id)
 
     React.useEffect(()=>{
     
         const sendGetRequest = async () => {
             try {
                 const res = await axios.get("http://localhost:4000/teacher/dashboard/class/"+c_id);
-                console.log(res.data);
+                //console.log(res.data);
                 setAssingdata(res.data.Assignment);
                 setmsg(res.data.msg)
-                //console.log(classdata)
+                //console.log("Assignment data"+res.data.Assignment.ExpectedOutput)
                 alert(res.data.msg)
             } catch (err) {
                 // Handle Error Here
@@ -45,7 +45,7 @@ const TeacherAssignment = () => {
                 Assignid = {a._id}
                 assignname = {a.AssignmentName}
                 instruction = {a.Instructions}
-                expect = {a.ExpectOutput}
+                expect = {a.ExpectedOutput}
                 classid = {a.ClassID}
                 deadline = {a.Deadline}
                 file = {a.AssignmentFile}

@@ -9,9 +9,11 @@ dotenv.config();
 
 
 mongoose.connect(process.env.DB_CONNECT,
-{useNewUrlParser : true},()=>{
-console.log('connected to db')
-})
+{useNewUrlParser : true}).then(()=>{
+    console.log('connected to db '+ mongoose.connection.readyState )
+}).catch(e => console.log(e));
+
+
 app.get('/', (req,res)=>{
     res.send('Server Running')
 })
@@ -20,6 +22,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended:false}))
 
 app.use('/teacher', require('../Backend/routes/teacher'))
+app.use('/student', require('../Backend/routes/student'))
 
 app.listen(4000, ()=>{
     console.log('Server Started')

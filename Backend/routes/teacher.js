@@ -8,6 +8,10 @@ const Teacher = require('../models/TeacherModel');
 const Class = require('../models/ClassModel')
 const Assignment = require('../models/AssignmentModel')
 
+mongoose.connect('mongodb+srv://subyyal:byyl12345@clustercpc.4rwoizy.mongodb.net/?retryWrites=true&w=majority',
+{useNewUrlParser : true}).then(()=>{
+    console.log('connected to db in teacher')
+}).catch(e => console.log(e));
 
 router.get('/', (req, res)=>{
     res.json('on Teacher')
@@ -56,6 +60,7 @@ router.post('/login', async (req, res)=>{
 
     }
     try{
+        //console.log(req.body.email)
     const found = await Teacher.findOne({email: req.body.email})
     if(found){
         const success = await bcrypt.compare(req.body.password, found.password)
@@ -173,11 +178,11 @@ router.post('/dashboard/createClass/:Tid', async (req, res)=>{
 //getting assignments of class
 router.get('/dashboard/class/:id', async (req, res)=>{
     const Cl_id = req.params.id;
-    console.log("here in class" + Cl_id)
+    //console.log("here in class" + Cl_id)
     try{
     const found = await Assignment.find({ClassID : Cl_id});
     if(found.length>=1){
-        console.log(found)
+        console.log("found"+found)
         res.json({msg: 'done', Assignment: found})
 
     }
@@ -202,22 +207,23 @@ var storage = multer.diskStorage({
  
 var upload = multer({storage: storage })
 
-router.post('/upload', upload.single('Assignment'),(req, res)=>{
-    var fileinfo = req.file;
-    var filename = fileinfo.filename
-    console.log("hereeee "+ req.file)
+// router.post('/upload', upload.single('Assignment'),(req, res)=>{
+//     var fileinfo = req.file;
+//     var filename = fileinfo.filename
+//     console.log("hereeee "+ req.file)
 
-    res.json(fileinfo)
+//     res.json(fileinfo)
 
-})
+// })
 
 //creating assignment in class
-router.post('/dashboard/class/createAssignment/:Cid', upload.single('Assignment'), async (req, res)=>{
+router.post('/dashboard/class/createAssignment/:Cid', upload.single('AssignmentFile'), (req, res)=>{
     const C_id = req.params.Cid;
-    console.log("her "+ req.file)
-    // var fileinfo = req.file;
-    // console.log(fileinfo)
-    // var filename = fileinfo.filename
+    // console.log(req)
+    // console.log(req.file)
+     var fileinfo = req.file;
+     console.log(fileinfo)
+     var filename = fileinfo.filename
     if(!req.body.AssignmentName){
         return res.json({msg: 'Fill Field Correctly'})
     }
@@ -227,11 +233,11 @@ router.post('/dashboard/class/createAssignment/:Cid', upload.single('Assignment'
                 "Instructions": req.body.Instructions,
                 "ExpectedOutput": req.body.ExpectedOutput,
                 "Deadline":req.body.Deadline,
-                "AssignmentFile": 'filename',
+                "AssignmentFile": filename,
                 "AllowedCode": req.body.AllowedCode,
                 "ClassID" : C_id
             });
-            console.log(new_assign)
+           // console.log(new_assign)
             new_assign.save()
             .then(res.json({msg:'Created', assign : new_assign}))
     

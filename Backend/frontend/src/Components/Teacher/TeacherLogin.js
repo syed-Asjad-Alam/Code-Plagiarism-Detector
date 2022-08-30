@@ -11,21 +11,21 @@ const TeacherLogin = () => {
   
   const userlogin = (e)=>{
     e.preventDefault();
-    console.log('here login')
+    //console.log('here login')
 
     const sendPostRequest = async () => {
-      console.log('in post')
+      //console.log('in post')
       try {
           const res = await axios.post('http://localhost:4000/teacher/login',{
                email: email,
                password: password
              });
-          console.log(res.data);
+          //console.log(res.data);
           setmsg(res.data.msg)
           alert(res.data.msg)
           if(res.data.msg === 'Login'){
-            console.log('in if')
-            console.log(res.data.teacher)
+            //console.log('in if')
+            //console.log(res.data.teacher)
             navigate('/dashboard', {state: {teacher: res.data.teacher}})
           }
 

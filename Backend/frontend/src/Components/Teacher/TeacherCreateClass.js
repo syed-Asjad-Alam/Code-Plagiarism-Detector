@@ -25,12 +25,12 @@ const TeacherCreateClass = () => {
                    ClassName: classname,
                    ClassDescription: classdescription
                  });
-              console.log(res.data);
+             // console.log(res.data);
               //setmsg(res.data.msg)
               alert(res.data.msg)
               if(res.data.msg === 'Created'){
                 console.log('in if')
-                console.log(res.data.teacher)
+                //console.log(res.data.teacher)
                 navigate('/dashboard', {state: {teacher:teacher}})
               }
     
