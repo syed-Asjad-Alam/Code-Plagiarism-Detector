@@ -1,0 +1,31 @@
+express:
+npm init -y
+npm install express
+npm install -D nodemon (packagejson-> "scripts": {
+    "start": "node index",
+    "dev" : "nodemon index"
+  }
+require express, app, port and simple route
+npm run dev
+router= express.Router() -> export router
+npm install mongoose
+require mongoose -> mongoose.connect('url')
+npm i dotenv -> link in env file, process.env.variable name
+import model user
+new user -> user = new User ({fields})
+return statement in sending error
+
+
+const sendGetRequest = async () => {
+    try {
+        const resp = await axios.get('https://jsonplaceholder.typicode.com/posts');
+        console.log(resp.data);
+    } catch (err) {
+        // Handle Error Here
+        console.error(err);
+    }
+};
+
+sendGetRequest();
+
+630280d745b518c40dce88f7

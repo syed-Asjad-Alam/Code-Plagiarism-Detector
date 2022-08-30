@@ -7,6 +7,8 @@ const multer = require("multer");
 const Teacher = require('../models/TeacherModel');
 const Class = require('../models/ClassModel')
 const Assignment = require('../models/AssignmentModel')
+const Solution = require('../models/SolutionModel')
+
 
 mongoose.connect('mongodb+srv://subyyal:byyl12345@clustercpc.4rwoizy.mongodb.net/?retryWrites=true&w=majority',
 {useNewUrlParser : true}).then(()=>{
@@ -182,7 +184,7 @@ router.get('/dashboard/class/:id', async (req, res)=>{
     try{
     const found = await Assignment.find({ClassID : Cl_id});
     if(found.length>=1){
-        console.log("found"+found)
+        //console.log("found"+found)
         res.json({msg: 'done', Assignment: found})
 
     }
@@ -206,15 +208,6 @@ var storage = multer.diskStorage({
   });
  
 var upload = multer({storage: storage })
-
-// router.post('/upload', upload.single('Assignment'),(req, res)=>{
-//     var fileinfo = req.file;
-//     var filename = fileinfo.filename
-//     console.log("hereeee "+ req.file)
-
-//     res.json(fileinfo)
-
-// })
 
 //creating assignment in class
 router.post('/dashboard/class/createAssignment/:Cid', upload.single('AssignmentFile'), (req, res)=>{
@@ -245,6 +238,22 @@ router.post('/dashboard/class/createAssignment/:Cid', upload.single('AssignmentF
         catch(err){
             res.json(err)
         }    
+
+})
+
+
+//Teacher Viewing Submitted Assignment
+router.get('/dashboard/class/viewsubmit/:A_id', async (req, res)=>{
+    const A_id = req.params.A_id;
+    //console.log("here Teacher viewing" + A_id)
+    const found = await Solution.find({AssignmentID : A_id});
+    if(found.length>=1){
+        //console.log(found)
+        res.json({msg: 'done', submit: found})
+    }
+    else {
+        res.json({msg: 'No Assignment Submitted Yet'})
+    }
 
 })
 
