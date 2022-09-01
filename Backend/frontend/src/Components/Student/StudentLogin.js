@@ -3,34 +3,27 @@ import { useState } from 'react';
 import axios from 'axios';
 import { Navigate, useNavigate } from 'react-router-dom';
 
-const TeacherLogin = () => {
-  const [email, setemail] = useState('')
+const StudentLogin = () => {
+    const [email, setemail] = useState('')
   const [password, setpassword] = useState('')
   const [msg, setmsg ] = useState('');
   const navigate = useNavigate();
-  
+
   const userlogin = (e)=>{
     e.preventDefault();
-    //console.log('here login')
-
     const sendPostRequest = async () => {
-      //console.log('in post')
       try {
-          const res = await axios.post('http://localhost:4000/teacher/login',{
+          const res = await axios.post('http://localhost:4000/student/login',{
                email: email,
                password: password
              });
-          //console.log(res.data);
           setmsg(res.data.msg)
           alert(res.data.msg)
           if(res.data.msg === 'Login'){
-            //console.log('in if')
-            //console.log(res.data.teacher)
-            navigate('/dashboard', {state: {teacher: res.data.teacher}})
+            navigate('/S_dashboard', {state: {student: res.data.student}})
           }
 
       } catch (err) {
-          // Handle Error Here
           console.error(err);
       }
   };
@@ -38,10 +31,10 @@ const TeacherLogin = () => {
 
   }
   
-  
+
   return (
-    <>
-    <div>TEACHER LOGIN</div>
+<>
+    <div>STUDENT LOGIN</div>
    <div className="form">
      <form >
        <div className="input-container">
@@ -59,14 +52,13 @@ const TeacherLogin = () => {
        <div className="button-container">
          <button onClick={userlogin}>Login</button>
        </div>
-       <a href='/signup'>Don't have account?</a>
+       <a href='/S_signup'>Don't have account?</a>
        <div>
-        <button onClick={()=> navigate('/forgetpass')}>Forget Password?</button>
+        <button onClick={()=> navigate('/S_forgetpass')}>Forget Password?</button>
        </div>
      </form>
    </div>
-    </>
-  )
+    </>  )
 }
 
-export default TeacherLogin
+export default StudentLogin

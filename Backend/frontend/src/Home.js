@@ -12,7 +12,7 @@ const Home = () => {
     </div>
     <br/>
     <div>
-      <a href='/'>Student  Portal</a>
+      <a href='/S_login'>Student  Portal</a>
     </div>
     <br/>
     <div>

@@ -4,9 +4,10 @@ import axios from 'axios';
 import { Navigate, useNavigate } from 'react-router-dom';
 import {Redirect} from 'react-router-dom'
 
-const TeacherSignup = () => {
-const [fname, setfname] = useState('')
-const [lname, setlname] = useState('')
+
+const StudentSignup = () => {
+    const [fname, setfname] = useState('')
+    const [lname, setlname] = useState('')
   const [email, setemail] = useState('')
   const [password, setpassword] = useState('')
   const [number, setnumber] = useState('')
@@ -15,26 +16,10 @@ const [lname, setlname] = useState('')
 
   const usersignup = async (e)=>{
     e.preventDefault();  
-    // await axios.post("http://localhost:4000/teacher/signup", {
-    //     firstname: fname,
-    //     lastname: lname,
-    //     email: email,
-    //     number: number,
-    //     password: password
-    // })
-    // .then(res =>{
-    //     setmsg(res.data.msg)
-
-    //   alert(res.data.msg);
-    //   console.log('after')      
-    // })
-    // if(msg === "Registered"){
-    //     navigate('/login')
-    // }
     const sendPostRequest = async () => {
       console.log('in post')
       try {
-          const res = await axios.post('http://localhost:4000/teacher/signup',{
+          const res = await axios.post('http://localhost:4000/student/signup',{
             firstname: fname,
             lastname: lname,
             email: email,
@@ -46,7 +31,7 @@ const [lname, setlname] = useState('')
           alert(res.data.msg)
           if(res.data.msg === 'Registered'){
             console.log('in if')
-            navigate('/login')
+            navigate('/S_login')
           }
 
       } catch (err) {
@@ -59,7 +44,7 @@ const [lname, setlname] = useState('')
 
   return (
     <>
-    <div>TEACHER SIGN UP</div>
+    <div>STUDENT SIGN UP</div>
    <div className="form">
      <form >
      <div className="input-container">
@@ -96,7 +81,7 @@ const [lname, setlname] = useState('')
          <button onClick={usersignup}>Sign Up!</button>
        </div>
        <div>
-        <a href='/login'>Already have an account?</a>
+        <a href='/S_login'>Already have an account?</a>
        </div>
      </form>
    </div>
@@ -104,4 +89,4 @@ const [lname, setlname] = useState('')
   )
 }
 
-export default TeacherSignup
+export default StudentSignup

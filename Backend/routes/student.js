@@ -84,9 +84,9 @@ catch(err){
 //forget student password
 router.post('/forgetpass/:Semail', async (req, res)=>{
     const req_email = req.params.Semail;
-    console.log(req_email)
+    //console.log(req_email)
     const found = await Student.findOne({email: req_email})
-    console.log(found)
+    //console.log(found)
     if(found){
         var pass = found.password;
         console.log(pass)
@@ -124,10 +124,10 @@ router.post('/forgetpass/:Semail', async (req, res)=>{
 //displaying classes on student dashboard
 router.get('/dashboard/:Sid', async (req, res)=>{
     const id = req.params.Sid;
-    console.log("here Student dashboard" + id)
+    //console.log("here Student dashboard" + id)
     const found = await Class.find({ClassStudents : id});
     if(found.length>=1){
-        console.log(found)
+        //console.log(found)
         res.json({msg: 'done', class: found})
     }
     else {
@@ -137,7 +137,6 @@ router.get('/dashboard/:Sid', async (req, res)=>{
 })
 
 //student joining class with class code
-
 router.post('/dashboard/joinclass/:Sid', async (req,res)=>{
     if(!req.body.classcode){
         return res.json({msg: 'Enter Code to Join'})
@@ -145,14 +144,14 @@ router.post('/dashboard/joinclass/:Sid', async (req,res)=>{
     const S_id = req.params.Sid
     const code = req.body.classcode;
     const found = await Class.findOne({ClassCode : code})
-    console.log('found'+found.ClassStudents)
+    //console.log('found'+found)
    
     if(found){
         console.log('in firt if'+ found)            
         //comparing in class student array that student already a member or not
         const already = found.ClassStudents.some((x=>x.toString()==S_id));
         if(already){
-            console.log('in 2nd if'+ already)
+            //console.log('in 2nd if'+ already)
             return res.json({msg: 'You are already a member of this class', class:found})
         }
         try{
@@ -168,25 +167,20 @@ router.post('/dashboard/joinclass/:Sid', async (req,res)=>{
         catch(err){
             res.json({msg:'Error Occur while Joining, Try again', err:err})
         }
-        
-
-
-
     }
     else{
         res.json({msg:'Incorrect Class Code'})
     }
-
 })
 
 //Student getting assignments of class
 router.get('/dashboard/class/:id', async (req, res)=>{
     const Cl_id = req.params.id;
-    console.log("here student in class" + Cl_id)
+    //console.log("here student in class" + Cl_id)
     try{
     const found = await Assignment.find({ClassID : Cl_id});
     if(found.length>=1){
-        console.log("found"+found)
+        //console.log("found"+found)
         res.json({msg: 'done', Assignment: found})
 
     }
@@ -214,15 +208,15 @@ var upload = multer({storage: storage })
 //student submitting assignment in class
 router.post('/dashboard/class/submitassignment/:Aid', upload.single('SubmittedFile'), (req, res)=>{
     const A_id = req.params.Aid;
-    //  var fileinfo = req.file;
-    //  console.log(fileinfo)
-    //  var filename = fileinfo.filename
+     var fileinfo = req.file;
+     //console.log(fileinfo)
+     var filename = fileinfo.filename
     if(!req.body.StudentID){
         return res.json({msg:'Some Error occur, try again later'})
     }
         try{
             const submit_assign = new Solution({
-                "SubmittedFile": 'filename',
+                "SubmittedFile": filename,
                 "AssignmentID": A_id,
                 "StudentID": req.body.StudentID,
                 "StudentName": req.body.StudentName ? req.body.StudentName : "Student Name"
@@ -254,14 +248,14 @@ router.put('/profile/update/:Sid', async (req, res)=>{
         return res.json({msg:'Fill Fields Correctly'})
     }
     const studentone = await Student.findById({_id : req.params.Sid});
-    console.log(studentone)
+    //console.log(studentone)
     if(studentone){
         //if user does not want to update password
         if(!req.body.NewPassword){
-            console.log('no new')
+            //console.log('no new')
             const success = await bcrypt.compare(req.body.CurrentPassword, studentone.password)
             if(success){ 
-                console.log('success') 
+                //console.log('success') 
             try{
                 const update_student = await Student.updateOne({_id: req.params.Sid},{
                     $set : {
@@ -272,7 +266,7 @@ router.put('/profile/update/:Sid', async (req, res)=>{
                 res.json({msg: 'updated', update_student}) 
             }
             catch(err){
-                console.log(err)
+                //console.log(err)
                 res.json({msg: 'User Does not Exist', err: err})
             }
 
@@ -283,7 +277,7 @@ router.put('/profile/update/:Sid', async (req, res)=>{
        }
        //if user want to update password
        else if(req.body.NewPassword && req.body.ConfirmPassword){
-        console.log("new")
+        //console.log("new")
         if(req.body.NewPassword !== req.body.ConfirmPassword){
             return res.json({msg: 'New & Confirm Password Fields Does not Match'})
         }
