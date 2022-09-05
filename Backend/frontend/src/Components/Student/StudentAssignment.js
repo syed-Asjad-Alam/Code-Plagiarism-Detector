@@ -21,7 +21,7 @@ const StudentAssignment = () => {
                 const res = await axios.get("http://localhost:4000/student/dashboard/class/"+c_id);
                 setAssingdata(res.data.Assignment);
                 setmsg(res.data.msg)
-                alert(res.data.msg)
+                //alert(res.data.msg)
             } catch (err) {
                 console.error(err);
             }
@@ -32,7 +32,7 @@ const StudentAssignment = () => {
 
   return (
 <>
-    <div>Class Assignments </div>
+    <div><h2>Class Assignments</h2> </div>
     <div>
         {msg!='done' ? <div>{msg}</div> : 
         <div>

@@ -103,7 +103,7 @@ const TeacherCreateAssign = () => {
 
   return (
         <>
-    <div>Create New Assignment</div>
+    <div><h2>Create New Assignment</h2></div>
     <div className="form">
      <form method='POST' encType='multipart/form-data'>
        <div className="input-container">
@@ -140,6 +140,7 @@ const TeacherCreateAssign = () => {
          <input type="file" name="Assignment"
          onChange={(e)=>setassignfile(e.target.files[0])}  />         
        </div>
+       <br/>
        <div className="button-container">
          <button onClick={CreatingAssign}>Create</button>
        </div>

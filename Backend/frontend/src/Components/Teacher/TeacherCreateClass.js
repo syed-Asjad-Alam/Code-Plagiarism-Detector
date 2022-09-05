@@ -45,7 +45,7 @@ const TeacherCreateClass = () => {
 
   return (
     <>
-    <div>Create New Class</div>
+    <div><h2>Create New Class</h2></div>
     <div className="form">
      <form >
        <div className="input-container">
@@ -60,6 +60,7 @@ const TeacherCreateClass = () => {
          value={classdescription}
          onChange={(x) => setdescription(x.target.value)} required />
        </div>
+       <br></br>
        <div className="button-container">
          <button onClick={CreatingClass}>Create</button>
        </div>

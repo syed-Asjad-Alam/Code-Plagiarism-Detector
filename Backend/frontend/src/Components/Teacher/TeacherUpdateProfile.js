@@ -44,7 +44,7 @@ const postdata = (e) =>{
 
   return (
     <>
-    <div>Teacher Update Profile</div>
+    <div><h2>Teacher Update Profile</h2></div>
     <div>
     <label>ID: </label>
      <input className="input" type="text" value = {t_id} disabled = {true}/>

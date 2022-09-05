@@ -26,7 +26,7 @@ import { Navigate, useNavigate } from 'react-router-dom';
 
    return (
     <>
-    <div>TEACHER FORGET PASSWORD</div>
+    <div><h2>TEACHER FORGET PASSWORD</h2></div>
    <div className="form">
      <form >
        <div className="input-container">
@@ -35,6 +35,7 @@ import { Navigate, useNavigate } from 'react-router-dom';
           onChange={(x) => setemail(x.target.value)}
           value={email} required />
        </div>
+       <br/>
        <div className="button-container">
          <button onClick={emailsending}>Send Email</button>
        </div>

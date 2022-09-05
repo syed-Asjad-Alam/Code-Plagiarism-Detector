@@ -41,7 +41,7 @@ const TeacherLogin = () => {
   
   return (
     <>
-    <div>TEACHER LOGIN</div>
+    <div><h2>TEACHER LOGIN</h2></div>
    <div className="form">
      <form >
        <div className="input-container">
@@ -59,8 +59,10 @@ const TeacherLogin = () => {
        <div className="button-container">
          <button onClick={userlogin}>Login</button>
        </div>
+       <br></br>
        <a href='/signup'>Don't have account?</a>
        <div>
+        <br></br>
         <button onClick={()=> navigate('/forgetpass')}>Forget Password?</button>
        </div>
      </form>

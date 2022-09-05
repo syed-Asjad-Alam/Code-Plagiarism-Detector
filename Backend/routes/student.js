@@ -147,7 +147,7 @@ router.post('/dashboard/joinclass/:Sid', async (req,res)=>{
     //console.log('found'+found)
    
     if(found){
-        console.log('in firt if'+ found)            
+       // console.log('in firt if'+ found)            
         //comparing in class student array that student already a member or not
         const already = found.ClassStudents.some((x=>x.toString()==S_id));
         if(already){

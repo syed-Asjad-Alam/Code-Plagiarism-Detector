@@ -46,7 +46,7 @@ const StudentAssignDescription = () => {
 
   return (
  <>
-    <div>Student Assignment Description</div>
+    <div><h2>Student Assignment Description</h2></div>
     <div>Assignment Name : {location.state.p.assignname}</div>
     <br/>
     <div>Assignment Instructions : {location.state.p.instruction}</div>
@@ -64,6 +64,7 @@ const StudentAssignDescription = () => {
          <input type="file" name="Assignment"
          onChange={(e)=>setsubmitfile(e.target.files[0])}  />         
        </div>
+       <br></br>
     <button onClick={submitAssign}>Submit Assignment</button>
     </>
   )

@@ -22,7 +22,7 @@ const TeacherAssignment = () => {
                 setAssingdata(res.data.Assignment);
                 setmsg(res.data.msg)
                 //console.log("Assignment data"+res.data.Assignment.ExpectedOutput)
-                alert(res.data.msg)
+                //alert(res.data.msg)
             } catch (err) {
                 // Handle Error Here
                 console.error(err);
@@ -34,9 +34,9 @@ const TeacherAssignment = () => {
 
   return (
     <>
-    <div>Class Assignments </div>
+    <div><h2>Class Assignments </h2></div>
     <div>
-        {msg!='done' ? <div>{msg}</div> : 
+        {msg!='done' ? <div><h3>{msg}</h3></div> : 
         <div>
              {Assigndata?.map((a)=>{
             return (

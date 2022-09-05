@@ -59,7 +59,7 @@ const [lname, setlname] = useState('')
 
   return (
     <>
-    <div>TEACHER SIGN UP</div>
+    <div><h2>TEACHER SIGN UP</h2></div>
    <div className="form">
      <form >
      <div className="input-container">
@@ -96,6 +96,7 @@ const [lname, setlname] = useState('')
          <button onClick={usersignup}>Sign Up!</button>
        </div>
        <div>
+        <br></br>
         <a href='/login'>Already have an account?</a>
        </div>
      </form>

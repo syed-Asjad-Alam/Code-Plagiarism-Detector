@@ -91,9 +91,9 @@ catch(err){
 //forget Teacher password
 router.post('/forgetpass/:Temail', async (req, res)=>{
     const req_email = req.params.Temail;
-    console.log(req_email)
+    //console.log(req_email)
     const found = await Teacher.findOne({email: req_email})
-    console.log(found)
+    //console.log(found)
     if(found){
         var pass = found.password;
         console.log(pass)
@@ -131,10 +131,10 @@ router.post('/forgetpass/:Temail', async (req, res)=>{
 //displaying classes on teacher dashboard
 router.get('/dashboard/:Tid', async (req, res)=>{
     const id = req.params.Tid;
-    console.log("here Teacher dashboard" + id)
+    //console.log("here Teacher dashboard" + id)
     const found = await Class.find({ClassTeacher : id});
     if(found.length>=1){
-        console.log(found)
+        //console.log(found)
         res.json({msg: 'done', class: found})
     }
     else {
@@ -156,7 +156,7 @@ router.post('/dashboard/createClass/:Tid', async (req, res)=>{
         for (var i = 0; i < 6; i++ ) {
           C_id += characters.charAt(Math.floor(Math.random() * charactersLength));
         }
-        console.log(C_id)
+        //console.log(C_id)
 
         try{
             const new_class = new Class({
@@ -252,7 +252,7 @@ router.get('/dashboard/class/viewsubmit/:A_id', async (req, res)=>{
         res.json({msg: 'done', submit: found})
     }
     else {
-        res.json({msg: 'No Assignment Submitted Yet'})
+        res.json({msg: 'No Assignment Submitted By Student Yet.'})
     }
 
 })
@@ -271,14 +271,14 @@ router.put('/profile/update/:id', async (req, res)=>{
         return res.json({msg:'Fill Fields Correctly'})
     }
     const teacherone = await Teacher.findById({_id : req.params.id});
-    console.log(teacherone)
+    //console.log(teacherone)
     if(teacherone){
         //if user does not want to update password
         if(!req.body.NewPassword){
-            console.log('no new')
+            //console.log('no new')
             const success = await bcrypt.compare(req.body.CurrentPassword, teacherone.password)
             if(success){ 
-                console.log('success') 
+               // console.log('success') 
             try{
                 const update_teacher = await Teacher.updateOne({_id: req.params.id},{
                     $set : {

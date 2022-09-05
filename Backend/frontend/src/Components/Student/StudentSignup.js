@@ -44,7 +44,7 @@ const StudentSignup = () => {
 
   return (
     <>
-    <div>STUDENT SIGN UP</div>
+    <div><h2>STUDENT SIGN UP</h2></div>
    <div className="form">
      <form >
      <div className="input-container">

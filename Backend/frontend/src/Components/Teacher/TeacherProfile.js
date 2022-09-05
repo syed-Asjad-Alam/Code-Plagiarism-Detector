@@ -36,7 +36,7 @@ React.useEffect(()=>{
     
   return (
     <>
-    <div>Teacher: {fname} Profile</div>
+    <div><h2>Teacher: {fname} Profile</h2></div>
     <div>
       <p>
         Id: {t_id}

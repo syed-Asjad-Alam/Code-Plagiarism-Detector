@@ -23,7 +23,7 @@ React.useEffect(()=>{
             const res = await axios.get("http://localhost:4000/student/dashboard/"+s_id);
             setclassdata(res.data.class);
             setmsg(res.data.msg)
-            alert(res.data.msg)
+            //alert(res.data.msg)
         } catch (err) {
             console.error(err);
         }
@@ -58,13 +58,13 @@ const JoinClass = (e)=>{
 
   return (
 <>
-    <div>Student: {student.firstname} {student.lastname}  Dashboard</div>
+    <div><h2>Student: {student.firstname} {student.lastname}  Dashboard</h2></div>
     <div>
         <button onClick={()=>(navigate('/S_profile', {state:{student: location.state.student }}))}>Profile</button>
     </div>
     <button onClick={()=>(navigate('/S_login'))}>Logout</button>
     <div>
-        {msg!='done' ? <div>{msg}</div> : 
+        {msg!='done' ? <div><h3>{msg}</h3></div> : 
         <div>
              {classdata?.map((c)=>{
             return (
@@ -84,9 +84,7 @@ const JoinClass = (e)=>{
        
 
     </div>
-    {/* <div>
-        <button onClick={()=>(navigate('/createclass', {state: {teacher: teacher}}))}> Create New Class</button>
-    </div> */}
+    
     <div>
         <button onClick={()=>setshow(!show)}>Join Class</button>
     </div>

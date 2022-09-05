@@ -25,7 +25,7 @@ const StudentForgetPass = () => {
 
   return (
     <>
-    <div>STUDENT FORGET PASSWORD</div>
+    <div><h2>STUDENT FORGET PASSWORD</h2></div>
    <div className="form">
      <form >
        <div className="input-container">

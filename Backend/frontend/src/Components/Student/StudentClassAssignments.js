@@ -10,7 +10,7 @@ const StudentClassAssignments = (props) => {
     const navigate = useNavigate();
   return (
 <>
-    <div style={{border: "2px solid black", margin:'2%', cursor:"pointer"}}>
+    <div style={{border: "2px solid blue", margin:'2%'}}>
       
     <div>Assignment Name : {props.assignname}</div>
     <div>Deadline : {props.deadline}</div>

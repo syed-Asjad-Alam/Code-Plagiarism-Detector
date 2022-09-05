@@ -32,7 +32,7 @@ const updateprofile = () =>{
 
   return (
     <>
-    <div>Student: {fname} Profile</div>
+    <div><h2>Student: {fname} Profile</h2></div>
     <div>
       <p>
         Id: {s_id}

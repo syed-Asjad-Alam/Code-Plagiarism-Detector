@@ -36,3 +36,22 @@
     transform: rotate(360deg);
   }
 }
+
+table {
+  margin-top: 2%;
+  margin-left: 9%;
+  border: 2px solid rgb(20, 59, 144);
+  width: 80%;
+  height: 200px;
+}
+  
+th {
+  border-bottom: 1px solid black;
+}
+  
+td {
+  text-align: center;
+  border-bottom: 1px solid rgb(138, 133, 133);
+  border-right: 1px solid rgb(138, 133, 133);
+
+}

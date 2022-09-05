@@ -31,7 +31,7 @@ React.useEffect(()=>{
             setclassdata(res.data.class);
             setmsg(res.data.msg)
             //console.log(classdata)
-            alert(res.data.msg)
+            //alert(res.data.msg)
         } catch (err) {
             // Handle Error Here
             console.error(err);
@@ -42,13 +42,13 @@ React.useEffect(()=>{
 }, []);
   return (
     <>
-    <div>Teacher: {teacher.firstname + teacher.lastname}  Dashboard</div>
+    <div><h2>Teacher: {teacher.firstname} {teacher.lastname}  Dashboard</h2></div>
     <div>
         <button onClick={()=>(navigate('/profile', {state:{teacher: location.state.teacher }}))}>Profile</button>
     </div>
     <button onClick={()=>(navigate('/login'))}>Logout</button>
     <div>
-        {msg!='done' ? <div>{msg}</div> : 
+        {msg!='done' ? <div><h3>{msg}</h3></div> : 
         <div>
              {classdata?.map((c)=>{
             return (

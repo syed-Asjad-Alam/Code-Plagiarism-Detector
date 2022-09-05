@@ -12,9 +12,9 @@ const StudentClass = (props) => {
 
   return (
   <>
-    <div style={{border: "2px solid black", margin:'2%', cursor:"pointer"}}
+    <div style={{border: "2px solid blue", margin:'2%', cursor:"pointer"}}
      onClick={()=>(navigate('/S_assignments', {state:{class: class_id, student: student}}))}> 
-    <div>Class Name : {props.classname}</div>
+    <div><h4>Class Name : {props.classname}</h4></div>
     <div>Class Description : {props.description}</div>
     <div>Class Code: {props.code}</div>
     </div>
